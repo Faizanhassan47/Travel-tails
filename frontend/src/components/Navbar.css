@@ -74,3 +74,28 @@
 .icon-btn:hover {
   background: var(--surface-hover);
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 0 16px;
+  }
+  .nav-links {
+    gap: 12px;
+  }
+  .nav-link {
+    font-size: 0.85rem;
+    gap: 4px;
+  }
+  .brand {
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+  .brand-logo {
+    height: 28px;
+  }
+  .btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

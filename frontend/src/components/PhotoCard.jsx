@@ -19,8 +19,14 @@ const PhotoCard = ({ photo }) => {
         <img src={optimizeCloudinaryUrl(photo.imageUrl)} alt={photo.title} className="photo-img" loading="lazy" />
         <div className="photo-overlay">
           <div className="photo-actions">
-            <button className="icon-btn"><Heart size={20} /></button>
-            <button className="icon-btn"><MessageCircle size={20} /></button>
+            <button className="icon-btn" onClick={(e) => { e.stopPropagation(); navigate(`/photo/${photo._id}`); }}>
+              <Heart size={18} />
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, marginLeft: '4px' }}>{photo.likes?.length || 0}</span>
+            </button>
+            <button className="icon-btn" onClick={(e) => { e.stopPropagation(); navigate(`/photo/${photo._id}`); }}>
+              <MessageCircle size={18} />
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, marginLeft: '4px' }}>{photo.comments?.length || 0}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -31,7 +37,14 @@ const PhotoCard = ({ photo }) => {
           {photo.city}, {photo.country}
         </p>
         <div className="photo-meta">
-          <span className="photo-author">By {photo.authorName || 'Traveler'}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img 
+              src={`https://api.dicebear.com/7.x/notionists/svg?seed=${photo.authorName || photo._id}&backgroundColor=transparent`} 
+              alt="Avatar" 
+              style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--surface-hover)', border: '1px solid var(--border)' }} 
+            />
+            <span className="photo-author">{photo.authorName || 'Traveler'}</span>
+          </div>
         </div>
       </div>
     </div>

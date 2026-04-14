@@ -13,7 +13,7 @@
 .photo-wrapper {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4/5;
+  width: 100%;
 }
 
 .photo-img {

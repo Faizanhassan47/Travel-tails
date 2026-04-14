@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Camera, Search, User, LogIn, LogOut, Bell } from 'lucide-react';
+import { Camera, Search, User, LogIn, LogOut, Bell, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import './Navbar.css';
@@ -10,6 +10,16 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     if (user) {
@@ -43,10 +53,13 @@ const Navbar = () => {
     <nav className="navbar glass">
       <div className="container nav-content">
         <Link to="/" className="brand">
-          <Camera className="brand-icon" />
-          <span>TripLens</span>
+          <img src="/logo.png" alt="Travel Tails Logo" className="brand-logo" />
+          <span>Travel Tails</span>
         </Link>
         <div className="nav-links">
+          <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle Theme">
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
           <Link to="/search" className="nav-link"><Search size={18}/> Explore</Link>
           {user ? (
             <>

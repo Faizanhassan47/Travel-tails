@@ -3,13 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { MapPin, Heart, MessageCircle } from 'lucide-react';
 import './PhotoCard.css';
 
+const optimizeCloudinaryUrl = (url) => {
+  if (url && url.includes('cloudinary.com/') && !url.includes('/f_auto,q_auto/')) {
+    return url.replace('/upload/', '/upload/f_auto,q_auto/');
+  }
+  return url;
+};
+
 const PhotoCard = ({ photo }) => {
   const navigate = useNavigate();
 
   return (
     <div className="photo-card glass-card" onClick={() => navigate(`/photo/${photo._id}`)}>
       <div className="photo-wrapper">
-        <img src={photo.imageUrl} alt={photo.title} className="photo-img" />
+        <img src={optimizeCloudinaryUrl(photo.imageUrl)} alt={photo.title} className="photo-img" loading="lazy" />
         <div className="photo-overlay">
           <div className="photo-actions">
             <button className="icon-btn"><Heart size={20} /></button>

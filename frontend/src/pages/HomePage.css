@@ -1,37 +1,39 @@
 .hero-section {
-  padding: 80px 0 60px;
+  padding: 60px 0 40px;
   text-align: center;
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 700;
   margin-bottom: 16px;
-  background: linear-gradient(to right, #f8fafc, #94a3b8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* overridden in index.css */
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
 }
 
-.photo-grid {
-  columns: 3 300px;
-  column-gap: 24px;
+/* Masonry Grid Setup */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -24px; /* Gutter size offset */
+  width: auto;
+  padding: 20px 0;
 }
 
-.photo-grid > div {
-  break-inside: avoid;
+.my-masonry-grid_column {
+  padding-left: 24px; /* Gutter size */
+  background-clip: padding-box;
+}
+
+/* Items inside masonry */
+.my-masonry-grid_column > div {
   margin-bottom: 24px;
 }
 
 .loading-state {
   text-align: center;
-  font-size: 1.2rem;
-  color: var(--text-secondary);
+  font-size: 1.1rem;
+  color: var(--text-muted);
   padding: 60px 0;
 }

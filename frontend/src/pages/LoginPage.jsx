@@ -22,21 +22,34 @@ const LoginPage = () => {
 
   return (
     <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 80px)' }}>
-      <div className="glass-card animate-fade-in" style={{ width: '100%', maxWidth: '400px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <h2>Welcome Back</h2>
-          <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Log in to share your tales.</p>
+      <div className="glass-card animate-fade-in" style={{ width: '100%', maxWidth: '450px', padding: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h2 style={{ fontSize: '2rem', marginBottom: '8px' }}>Welcome Back</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Log in to your account to continue your journey.</p>
         </div>
 
-        {error && <div style={{ background: 'var(--danger)', color: 'white', padding: '10px', borderRadius: '8px', marginBottom: '16px', textAlign: 'center' }}>{error}</div>}
+        {error && (
+          <div style={{ 
+            background: 'rgba(244, 63, 94, 0.1)', 
+            color: 'var(--danger)', 
+            padding: '12px', 
+            borderRadius: 'var(--radius-md)', 
+            marginBottom: '20px', 
+            textAlign: 'center',
+            fontSize: '0.9rem',
+            border: '1px solid rgba(244, 63, 94, 0.2)'
+          }}>
+            {error}
+          </div>
+        )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div className="form-group">
             <label className="form-label">Email Address</label>
             <input 
               type="email" 
               className="form-input" 
-              placeholder="you@example.com" 
+              placeholder="name@company.com" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required 
@@ -55,13 +68,13 @@ const LoginPage = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '12px' }}>
-            <LogIn size={18} /> Login
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '8px' }}>
+            <LogIn size={20} /> Login to Account
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--primary)' }}>Register here</Link>
+        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
+          New to TripLens? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '600' }}>Create account</Link>
         </div>
       </div>
     </div>

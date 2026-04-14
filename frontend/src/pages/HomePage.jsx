@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Map, Grid } from 'lucide-react';
+import Masonry from 'react-masonry-css';
 import PhotoCard from '../components/PhotoCard';
 import MapView from '../components/MapView';
 import api from '../services/api';
@@ -49,11 +50,15 @@ const HomePage = () => {
       {loading ? (
         <div className="loading-state">Loading amazing photos...</div>
       ) : viewMode === 'gallery' ? (
-        <div className="photo-grid">
+        <Masonry
+          breakpointCols={{ default: 3, 1100: 3, 768: 2, 500: 1 }}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
           {photos.map(photo => (
             <PhotoCard key={photo._id} photo={photo} />
           ))}
-        </div>
+        </Masonry>
       ) : (
         <div className="animate-fade-in">
           <MapView photos={photos} />

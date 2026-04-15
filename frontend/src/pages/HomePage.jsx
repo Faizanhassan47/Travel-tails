@@ -6,6 +6,7 @@ import PhotoCard from '../components/PhotoCard';
 import MapView from '../components/MapView';
 import api from '../services/api';
 import './HomePage.css';
+import ParallaxText from '../components/ParallaxText';
 
 const HomePage = () => {
   const [photos, setPhotos] = useState([]);
@@ -52,90 +53,55 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container animate-fade-in" style={{ paddingBottom: '60px' }}>
-      <div className="hero-section" style={{
-        backgroundImage: photos.length > 0 ? `url(${photos[0].imageUrl})` : 'none',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
-        {/* Dynamic Blur Overlay */}
-        <div style={{ position: 'absolute', inset: 0, background: 'var(--surface-hover)', opacity: photos.length > 0 ? 0.85 : 1, backdropFilter: 'blur(30px)', zIndex: 0 }}></div>
-
-        <div style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <span className="hero-badge">✨ Explore the best travel moments</span>
+    <div className="kreativ-home">
+      <section className="kreativ-hero">
+        <div className="hero-text-container">
+          <ParallaxText>
+            <h1 className="kreativ-title animate-reveal">
+              Visual Story / <br/>
+              Human Journey
+            </h1>
+          </ParallaxText>
           
-          <h1 className="hero-title">Find your next adventure</h1>
-          
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px' }}>
-            <div style={{ display: 'flex' }}>
-              {['Oliver', 'Mia', 'Lucas', 'Emma'].map((seed, index) => (
-                <img key={seed} src={`https://api.dicebear.com/7.x/notionists/svg?seed=${seed}&backgroundColor=transparent`} alt="avatar" style={{ width: '36px', height: '36px', borderRadius: '50%', border: '2px solid var(--surface-hover)', marginLeft: index === 0 ? '0' : '-16px', background: 'var(--secondary-bg)', zIndex: 5 - index }} />
-              ))}
+          <div className="hero-bottom-info">
+            <div className="scroll-indicator animate-fade-in" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+               <span>Scroll</span>
             </div>
-            <span style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Join 10,000+ travelers exploring the world</span>
-          </div>
-
-          <div className="hero-search-container">
-            <div className="hero-search-box" onClick={() => navigate('/search')}>
-              <Search size={20} className="search-icon" />
-              <input type="text" placeholder={typedText} readOnly />
-              <button className="btn btn-primary" onClick={(e) => { e.stopPropagation(); navigate('/search'); }}>Search</button>
-            </div>
-            <div className="hero-tags">
-              <span>Trending:</span>
-              <button className="tag-pill" onClick={() => navigate('/search')}>Mountains</button>
-              <button className="tag-pill" onClick={() => navigate('/search')}>Beaches</button>
-              <button className="tag-pill" onClick={() => navigate('/search')}>Europe</button>
-              <button className="tag-pill" onClick={() => navigate('/search')}>Pets</button>
-            </div>
-          </div>
-
-          <div className="hero-view-toggles">
-            <button 
-              className={`btn ${viewMode === 'gallery' ? 'btn-primary' : 'btn-outline'}`} 
-              onClick={() => setViewMode('gallery')}
-              style={{ background: viewMode !== 'gallery' ? 'var(--surface)' : '' }}
-            >
-              <Grid size={18} /> Gallery
-            </button>
-            <button 
-              className={`btn ${viewMode === 'map' ? 'btn-primary' : 'btn-outline'}`} 
-              onClick={() => setViewMode('map')}
-              style={{ background: viewMode !== 'map' ? 'var(--surface)' : '' }}
-            >
-              <Map size={18} /> Map View
-            </button>
+            
+            <p className="kreativ-description animate-reveal-slow">
+              We're not just a travel platform. We're a living <br />
+              journal of human connection through <br />
+              the lens of every journey.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {loading ? (
-        <Masonry
-          breakpointCols={{ default: 3, 1100: 3, 768: 2, 500: 1 }}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {Array(6).fill(0).map((_, i) => (
-            <div key={i} className="glass-card" style={{ height: `${200 + (i % 3) * 100}px`, marginBottom: '24px', animation: 'fadeIn 1s infinite alternate', background: 'var(--surface-hover)', border: 'none' }}></div>
-          ))}
-        </Masonry>
-      ) : viewMode === 'gallery' ? (
-        <Masonry
-          breakpointCols={{ default: 3, 1100: 3, 768: 2, 500: 1 }}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {photos.map(photo => (
-            <PhotoCard key={photo._id} photo={photo} />
-          ))}
-        </Masonry>
-      ) : (
-        <div className="animate-fade-in">
-          <MapView photos={photos} />
+      <section className="kreativ-gallery">
+        <div className="gallery-header-minimal">
+          <h2 className="minimal-title">Featured Stories</h2>
+          <div className="minimal-controls">
+            <button className={viewMode === 'gallery' ? 'active' : ''} onClick={() => setViewMode('gallery')}>Grid</button>
+            <button className={viewMode === 'map' ? 'active' : ''} onClick={() => setViewMode('map')}>Map</button>
+          </div>
         </div>
-      )}
+
+        {loading ? (
+          <div className="minimal-loader">Loading Tales...</div>
+        ) : viewMode === 'gallery' ? (
+          <div className="minimal-grid">
+            {photos.map(photo => (
+              <PhotoCard key={photo._id} photo={photo} />
+            ))}
+          </div>
+        ) : (
+          <div className="map-minimal-container">
+            <MapView photos={photos} />
+          </div>
+        )}
+      </section>
     </div>
+
   );
 };
 

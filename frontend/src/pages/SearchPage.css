@@ -1,0 +1,104 @@
+.kreativ-explore {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 100px 60px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.explore-header-minimal {
+  position: absolute;
+  top: -80px;
+  left: -20px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+}
+
+.explore-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.explore-title-main {
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 60px;
+  color: var(--text);
+}
+
+.search-field-minimal {
+  margin-bottom: 80px;
+  max-width: 800px;
+}
+
+.minimal-search-input {
+  width: 100%;
+  border: none;
+  border-bottom: 4px solid var(--text);
+  padding: 20px 0;
+  font-size: 3rem;
+  font-weight: 500;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  transition: border-color 0.3s;
+}
+
+.minimal-search-input::placeholder {
+  color: var(--border);
+}
+
+.minimal-search-input:focus {
+  border-color: var(--accent);
+}
+
+.results-info-minimal {
+  margin-bottom: 40px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.no-results-minimal {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.no-results-minimal h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Mobile */
+@media (max-width: 1000px) {
+  .explore-grid { grid-template-columns: repeat(2, 1fr); }
+  .minimal-search-input { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+  .kreativ-explore { padding: 100px 40px 60px; }
+  .explore-title-main { font-size: 3.5rem; }
+  .minimal-search-input { font-size: 1.8rem; }
+}
+
+@media (max-width: 600px) {
+  .kreativ-explore { padding: 100px 20px 60px; }
+  .explore-title-main { font-size: 3rem; }
+  .minimal-search-input { font-size: 1.5rem; }
+  .explore-grid { grid-template-columns: 1fr; gap: 20px; }
+  .search-field-minimal { margin-bottom: 50px; }
+}

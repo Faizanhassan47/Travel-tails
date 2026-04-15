@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import api from '../services/api';
 import CommentSection from '../components/CommentSection';
 import RatingStars from '../components/RatingStars';
+import './PhotoDetailsPage.css';
 
 const PhotoDetailsPage = () => {
   const { id } = useParams();
@@ -32,82 +33,64 @@ const PhotoDetailsPage = () => {
     fetchPhotoData();
   }, [id]);
 
-  if (loading) return <div className="container" style={{ padding: '40px', textAlign: 'center' }}>Loading photo...</div>;
-  if (!photo) return <div className="container" style={{ padding: '40px', textAlign: 'center' }}>Photo not found.</div>;
+  if (loading) return <div className="kreativ-details" style={{ textAlign: 'center' }}>Loading photo...</div>;
+  if (!photo) return <div className="kreativ-details" style={{ textAlign: 'center' }}>Photo not found.</div>;
 
   return (
-    <div className="container animate-fade-in" style={{ paddingBottom: '60px', marginTop: '40px', maxWidth: '1200px' }}>
+    <div className="kreativ-details">
+      <div className="bg-blob blob-red"></div>
+      <div className="bg-blob blob-blue"></div>
       <Helmet>
         <title>{photo.title} - TravelTales</title>
-        <meta name="description" content={photo.caption || `A beautiful photo of ${photo.city}, ${photo.country}.`} />
-        <meta property="og:title" content={`${photo.title} on TravelTales`} />
-        <meta property="og:description" content={photo.caption || `A beautiful photo of ${photo.city}, ${photo.country}.`} />
-        <meta property="og:image" content={photo.imageUrl} />
       </Helmet>
 
-      <button onClick={() => navigate(-1)} className="btn btn-outline" style={{ border: 'none', background: 'var(--surface-hover)', padding: '12px', borderRadius: '50%', marginBottom: '24px' }}>
-        <ArrowLeft size={24} /> 
+      <button onClick={() => navigate(-1)} className="minimal-back-btn">
+        <ArrowLeft size={16} />
+        <span>Back to Stories</span>
       </button>
 
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexWrap: 'wrap', borderRadius: '32px', boxShadow: 'var(--shadow-lg)' }}>
-        
-        {/* Left Side: Huge Rounded Image */}
-        <div style={{ flex: '1 1 500px', background: 'var(--secondary-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img 
-            src={photo.imageUrl} 
-            alt={photo.title} 
-            style={{ width: '100%', height: '100%', maxHeight: '85vh', objectFit: 'cover' }} 
-          />
+      <div className="title-giant-header">
+        <h1 className="title-giant-text animate-reveal">{photo.title}</h1>
+      </div>
+
+      <div className="details-main-grid">
+        {/* Visual Column */}
+        <div className="details-visual-col">
+          <div className="details-image-container">
+            <img src={photo.imageUrl} alt={photo.title} />
+          </div>
         </div>
 
-        {/* Right Side: Sticky Pinterest-style Panel */}
-        <div style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', background: 'var(--surface)' }}>
-          <div style={{ padding: '40px' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '16px', fontWeight: 800, letterSpacing: '-0.03em' }}>{photo.title}</h1>
-            
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '1.1rem' }}>
-              <MapPin size={20} style={{ color: 'var(--primary)' }} />
-              <span style={{ fontWeight: 500 }}>{photo.city}, {photo.country}</span>
-            </div>
-
-            {photo.caption && (
-              <p style={{ lineHeight: '1.6', fontSize: '1.1rem', marginBottom: '32px', color: 'var(--text-primary)' }}>
-                {photo.caption}
-              </p>
-            )}
-
-            <div style={{ marginBottom: '32px' }}>
-              <RatingStars photoId={photo._id} currentRatingObj={ratingObj} onRatingChange={() => api.get(`/photos/${id}/ratings`).then(res => setRatingObj(res.data))} />
-            </div>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '32px' }}>
-              {photo.tags?.map((tag, idx) => (
-                <span key={idx} style={{ background: 'var(--surface-hover)', color: 'var(--text-primary)', padding: '6px 16px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 500, letterSpacing: '0.02em' }}>
-                  #{tag}
-                </span>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '24px 0', borderTop: '1px solid var(--border)' }}>
-              <img 
-                src={`https://api.dicebear.com/7.x/notionists/svg?seed=${photo.uploadedBy?.name || 'user'}&backgroundColor=transparent`} 
-                alt="Avatar" 
-                style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--secondary-bg)', border: '1px solid var(--border)' }} 
-              />
-              <div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Uploaded by</p>
-                <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: '700' }}>{photo.uploadedBy?.name || 'Traveler'}</p>
+        {/* Info Column */}
+        <div className="details-info-col">
+          <div className="details-meta-top">
+            <div className="details-author-badge">
+              <img src={`https://api.dicebear.com/7.x/notionists/svg?seed=${photo.uploadedBy?.name || 'user'}&backgroundColor=transparent`} alt="avatar" />
+              <div className="details-author-info">
+                <span className="label">Captured by</span>
+                <span className="name">{photo.uploadedBy?.name || 'Traveler'}</span>
               </div>
             </div>
-            
-            <div style={{ marginTop: '24px' }}>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '16px', fontWeight: 700 }}>Comments</h3>
-              <CommentSection photoId={photo._id} />
+            <div className="details-location-tag">
+              <MapPin size={18} />
+              <span>{photo.city}, {photo.country}</span>
             </div>
+          </div>
+
+          <p className="details-caption">
+            {photo.caption || "A moment frozen in time, capturing the essence of the journey through light and shadow."}
+          </p>
+
+          <RatingStars photoId={photo._id} currentRatingObj={ratingObj} onRatingChange={() => api.get(`/photos/${id}/ratings`).then(res => setRatingObj(res.data))} />
+
+          <div className="details-journal-section">
+            <span className="details-section-label">Journal Entries</span>
+            <CommentSection photoId={photo._id} />
           </div>
         </div>
       </div>
     </div>
+
   );
 };
 

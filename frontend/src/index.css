@@ -1,208 +1,129 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 :root {
-  /* Pinterest/Instagram Inspired Light Theme */
-  --bg-color: #ffffff;
+  --bg: #ffffff;
+  --text: #000000;
+  --text-muted: #999999;
   --surface: #ffffff;
-  --surface-hover: #f1f1f1;
-  --secondary-bg: #fafafa;
-  
-  --primary: #e60023; /* Pinterest Red */
-  --primary-hover: #ad081b;
-  --accent: #0095f6; /* Instagram Blue */
-  
-  --text-primary: #111111;
-  --text-secondary: #767676;
-  --text-muted: #8e8e8e;
-  
-  --border: #efefef;
-  --border-focus: #262626;
-  
-  --danger: #ed4956;
-  --success: #28a745;
-  --warning: #f59e0b;
-  
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.12);
+  --border: #f1f1f1;
+  --accent: #e60023;
+  --drawer-bg: #000000;
+  --shadow-lg: 0 40px 100px rgba(0,0,0,0.1);
 }
 
 [data-theme='dark'] {
-  /* Clean Dark Theme */
-  --bg-color: #000000;
-  --surface: #121212;
-  --surface-hover: #262626;
-  --secondary-bg: #0a0a0a;
-  
-  --primary: #e60023;
-  --primary-hover: #ad081b;
-  --accent: #0095f6;
-  
-  --text-primary: #f5f5f5;
-  --text-secondary: #a8a8a8;
-  --text-muted: #8e8e8e;
-  
-  --border: #262626;
-  --border-focus: #f5f5f5;
-  
-  --shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.02);
-  --shadow-md: 0 4px 12px rgba(255, 255, 255, 0.03);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.5);
+  --bg: #000000;
+  --text: #ffffff;
+  --text-muted: #666666;
+  --surface: #000000;
+  --border: #1a1a1a;
+  --accent: #ff002b;
+  --drawer-bg: #111111;
+  --shadow-lg: 0 40px 100px rgba(0,0,0,0.5);
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  min-height: 100vh;
   margin: 0;
-  overflow-x: hidden;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Transitions */
+.animate-reveal {
+  animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-ul {
-  list-style: none;
-}
-
-/* Card Styles */
-.glass {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-
-.glass-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.glass-card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-/* Minimal Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-
-.hero-title {
-  font-size: 3rem !important;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.hero-subtitle {
-  font-size: 1.1rem !important;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-/* Clean Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  gap: 8px;
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--primary-hover);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-
-.btn-outline:hover {
-  background: var(--surface-hover);
-}
-
-/* Input Fields */
-.form-input {
-  width: 100%;
-  padding: 14px 16px;
-  background: var(--secondary-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  transition: border-color 0.2s ease;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--text-secondary);
-  background: var(--surface);
-}
-
-/* Layout Utilities */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+.animate-reveal-slow {
+  animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes reveal {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Global Blobs */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+[data-theme='dark'] .bg-blob {
+  opacity: 0.25;
+}
+
+.blob-red {
+  width: 500px;
+  height: 500px;
+  background: #e60023;
+  top: -100px;
+  right: -100px;
+  animation: float-blob 20s infinite alternate;
+}
+
+.blob-blue {
+  width: 400px;
+  height: 400px;
+  background: #0095f6;
+  bottom: 10%;
+  left: -100px;
+  animation: float-blob 25s infinite alternate-reverse;
+}
+
+@keyframes float-blob {
+  from { transform: translate(0, 0); }
+  to { transform: translate(100px, 50px); }
 }
 
 /* Minimal Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-color);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--border);
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+  background: var(--text-muted);
+}
+
+/* ── Global Mobile Utilities ── */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Hide custom cursor on touch devices */
+@media (max-width: 1024px) {
+  .custom-cursor { display: none !important; }
+}
+
+/* App padding for mobile */
+@media (max-width: 600px) {
+  main {
+    padding-top: 70px !important;
+  }
 }

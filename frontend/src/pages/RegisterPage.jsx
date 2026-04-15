@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserPlus } from 'lucide-react';
+import { UserPlus, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import './AuthPages.css';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'consumer' });
@@ -22,59 +23,55 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 80px)' }}>
-      <div className="glass-card animate-fade-in" style={{ width: '100%', maxWidth: '500px', padding: '40px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '8px' }}>Join TripLens</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>Become a part of our global traveler community.</p>
-        </div>
+    <div className="kreativ-auth">
+      <div className="bg-blob blob-red"></div>
+      <div className="bg-blob blob-blue"></div>
+      
+      <div className="auth-header-minimal">
+        <h1 className="title-giant">Create</h1>
+      </div>
 
-        {error && (
-          <div style={{ 
-            background: 'rgba(244, 63, 94, 0.1)', 
-            color: 'var(--danger)', 
-            padding: '12px', 
-            borderRadius: 'var(--radius-md)', 
-            marginBottom: '20px', 
-            textAlign: 'center',
-            fontSize: '0.9rem',
-            border: '1px solid rgba(244, 63, 94, 0.2)'
-          }}>
-            {error}
-          </div>
-        )}
+      <div className="auth-card-minimal">
+        <button onClick={() => navigate(-1)} className="minimal-back-btn" style={{ marginBottom: '40px' }}>
+          <ArrowLeft size={24} />
+          <span>Back</span>
+        </button>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div className="form-group">
-            <label className="form-label">Full Name</label>
-            <input type="text" name="name" className="form-input" placeholder="John Doe" value={formData.name} onChange={handleChange} required />
+        <h2 className="auth-title-large">Join /<br/>Community</h2>
+
+        {error && <div className="minimal-error" style={{ marginBottom: '32px' }}>{error}</div>}
+
+        <form onSubmit={handleSubmit} className="auth-form-minimal">
+          <div className="auth-input-group">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="John Doe" value={formData.name} onChange={handleChange} required />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Email Address</label>
-            <input type="email" name="email" className="form-input" placeholder="name@company.com" value={formData.email} onChange={handleChange} required />
+          <div className="auth-input-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="name@company.com" value={formData.email} onChange={handleChange} required />
           </div>
           
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <input type="password" name="password" className="form-input" placeholder="••••••••" value={formData.password} onChange={handleChange} required />
+          <div className="auth-input-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="••••••••" value={formData.password} onChange={handleChange} required />
           </div>
 
-          <div className="form-group">
-             <label className="form-label">Account Type</label>
-             <select name="role" className="form-input" value={formData.role} onChange={handleChange} style={{ appearance: 'none', cursor: 'pointer' }}>
+          <div className="auth-input-group">
+             <label>Account Type</label>
+             <select name="role" value={formData.role} onChange={handleChange} className="minimal-select" style={{ background: 'transparent', border: 'none', borderBottom: '2px solid #eee', padding: '16px 0', fontSize: '1.1rem', outline: 'none' }}>
                 <option value="consumer">Consumer (Browse & Rate)</option>
                 <option value="creator">Creator (Upload Photos)</option>
              </select>
           </div>
 
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '8px' }}>
-            <UserPlus size={20} /> Create Free Account
+          <button type="submit" className="auth-submit-btn">
+            CREATE INNER CIRCLE ACCOUNT
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
-          Already have an account? <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '600' }}>Log in</Link>
+        <div className="auth-footer-minimal">
+          Already a member? <Link to="/login">Sign in to your account</Link>
         </div>
       </div>
     </div>
@@ -82,3 +79,4 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+

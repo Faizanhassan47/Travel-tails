@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import PhotoCard from '../components/PhotoCard';
 import api from '../services/api';
+import './SearchPage.css';
 
 const SearchPage = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearch = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!query.trim()) return;
 
     setLoading(true);
@@ -25,61 +28,62 @@ const SearchPage = () => {
     setLoading(false);
   };
 
+  // Auto search on enter
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
-    <div className="container animate-fade-in" style={{ padding: '60px 24px', minHeight: 'calc(100vh - 80px)' }}>
-      <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '16px', fontWeight: '800' }}>Explore the World</h1>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
-          Discover breathtaking destinations through the eyes of fellow travelers.
-        </p>
+    <div className="kreativ-explore">
+      <div className="bg-blob blob-red"></div>
+      <div className="bg-blob blob-blue"></div>
+      <div className="explore-header-minimal">
+        <h1 className="title-giant">Explore</h1>
       </div>
 
-      <div style={{ maxWidth: '700px', margin: '0 auto 60px' }}>
-        <form onSubmit={handleSearch} style={{ display: 'flex', gap: '12px' }}>
-          <div style={{ flex: 1, position: 'relative' }}>
-            <Search size={20} style={{ 
-              position: 'absolute', 
-              left: '18px', 
-              top: '50%', 
-              transform: 'translateY(-50%)', 
-              color: 'var(--text-muted)',
-              pointerEvents: 'none'
-            }} />
-            <input 
-              type="text" 
-              className="form-input" 
-              placeholder="Search by city, country, or tags..." 
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              style={{ paddingLeft: '52px' }}
-            />
+      <div className="explore-content">
+        <button onClick={() => navigate(-1)} className="minimal-back-btn">
+          <ArrowLeft size={24} />
+          <span>Back</span>
+        </button>
+
+        <h1 className="explore-title-main">Discover / World</h1>
+
+        <div className="search-field-minimal">
+          <input 
+            type="text" 
+            className="minimal-search-input" 
+            placeholder="Type city, country..." 
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+          />
+        </div>
+
+        {searched && (
+          <div className="results-info-minimal">
+            {loading ? 'Sifting through memories...' : `${results.length} Stories found for "${query}"`}
           </div>
-          <button type="submit" className="btn btn-primary" style={{ padding: '0 32px' }}>
-            {loading ? 'Searching...' : 'Explore'}
-          </button>
-        </form>
-      </div>
+        )}
 
-      {loading && (
-        <div style={{ textAlign: 'center', padding: '60px 0' }}>
-          <div className="animate-float" style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>Searching for amazing views...</div>
+        {searched && !loading && results.length === 0 && (
+          <div className="no-results-minimal">
+            <h2>No memories found in this region.</h2>
+          </div>
+        )}
+
+        <div className="explore-grid">
+          {results.map(photo => (
+            <PhotoCard key={photo._id} photo={photo} />
+          ))}
         </div>
-      )}
-
-      {searched && !loading && results.length === 0 && (
-        <div className="glass-card" style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '60px', maxWidth: '600px', margin: '0 auto' }}>
-          <h3 style={{ marginBottom: '12px' }}>No matches found</h3>
-          <p>We couldn't find any photos for "{query}". Try searching for something else like "Japan", "Mountain", or "Sunset".</p>
-        </div>
-      )}
-
-      <div className="photo-grid">
-        {results.map(photo => (
-          <PhotoCard key={photo._id} photo={photo} />
-        ))}
       </div>
     </div>
   );
 };
 
 export default SearchPage;
+

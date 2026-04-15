@@ -1,0 +1,228 @@
+.kreativ-upload {
+  background: #fff;
+  min-height: 100vh;
+  padding: 100px 60px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.kreativ-upload-layout {
+  position: relative;
+}
+
+.upload-header-minimal {
+  position: absolute;
+  top: -80px;
+  left: -20px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.05;
+}
+
+.upload-columns {
+  display: flex;
+  gap: 80px;
+  position: relative;
+  z-index: 10;
+}
+
+.column-visual {
+  flex: 1;
+}
+
+.kreativ-dropzone {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border: 2px dashed #eee;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.kreativ-dropzone:hover {
+  border-color: #000;
+  background: #fafafa;
+}
+
+.kreativ-dropzone.has-preview {
+  border-style: solid;
+  border-color: #000;
+}
+
+.file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.drop-content {
+  text-align: center;
+  color: #999;
+}
+
+.drop-content h3 {
+  color: #000;
+  font-size: 1.5rem;
+  margin: 20px 0 8px;
+}
+
+.upload-preview-minimal {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.upload-preview-minimal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-btn-minimal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 30;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.column-info {
+  flex: 1.2;
+}
+
+.minimal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.minimal-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.minimal-input-group label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
+}
+
+.minimal-input-group input, 
+.minimal-input-group textarea {
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.minimal-input-group input:focus, 
+.minimal-input-group textarea:focus {
+  border-color: #000;
+}
+
+.minimal-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.autocomplete-minimal {
+  position: relative;
+}
+
+.minimal-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  z-index: 100;
+  margin-top: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+}
+
+.suggestion-item-minimal {
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.suggestion-item-minimal:hover {
+  background: #f5f5f5;
+}
+
+.minimal-submit-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 24px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  margin-top: 20px;
+}
+
+.minimal-submit-btn:hover:not(:disabled) {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+.minimal-submit-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.minimal-error {
+  background: rgba(230, 0, 35, 0.05);
+  color: #e60023;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  font-weight: 500;
+  border: 1px solid rgba(230, 0, 35, 0.1);
+}
+
+/* Mobile */
+@media (max-width: 1000px) {
+  .upload-columns {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .kreativ-upload {
+    padding: 60px 20px;
+  }
+  .minimal-input-row {
+    grid-template-columns: 1fr;
+  }
+}

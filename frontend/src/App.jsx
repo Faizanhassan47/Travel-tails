@@ -12,12 +12,15 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
 import CursorCustom from './components/CursorCustom';
 import PageTransition from './components/PageTransition';
+import ScrollProgress from './components/ScrollProgress';
 
 function AppContent() {
   const location = useLocation();
   
   return (
     <>
+      <div className="film-grain"></div>
+      <ScrollProgress />
       <CursorCustom />
       <Navbar />
       <main style={{ paddingTop: '80px', minHeight: 'calc(100vh - 80px)' }}>

@@ -23,18 +23,21 @@ const LoginPage = () => {
 
   return (
     <div className="kreativ-auth">
-      <div className="bg-blob blob-red"></div>
-      <div className="bg-blob blob-blue"></div>
-      
-      <div className="auth-header-minimal">
-        <h1 className="title-giant">Access</h1>
+      <div className="auth-visual-side">
+        <img src="/src/assets/alishagram_auth_bg.png" alt="Auth Background" />
+        <div className="auth-vignette"></div>
       </div>
 
-      <div className="auth-card-minimal">
-        <button onClick={() => navigate(-1)} className="minimal-back-btn" style={{ marginBottom: '40px' }}>
-          <ArrowLeft size={24} />
-          <span>Back</span>
-        </button>
+      <div className="auth-form-side">
+        <div className="auth-header-minimal">
+          <h1 className="title-giant">Access</h1>
+        </div>
+
+        <div className="auth-card-minimal">
+          <button onClick={() => navigate(-1)} className="minimal-back-btn" style={{ marginBottom: '40px' }}>
+            <ArrowLeft size={24} />
+            <span>Back</span>
+          </button>
 
         <h2 className="auth-title-large">Welcome /<br/>Back</h2>
 
@@ -69,7 +72,8 @@ const LoginPage = () => {
         </form>
 
         <div className="auth-footer-minimal">
-          New to Travel Tails? <Link to="/register">Create inner circle account</Link>
+          New to Alishagram? <Link to="/register">Create inner circle account</Link>
+        </div>
         </div>
       </div>
     </div>

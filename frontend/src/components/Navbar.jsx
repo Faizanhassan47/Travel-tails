@@ -30,7 +30,7 @@ const Navbar = () => {
     <>
       <nav className="navbar-minimal">
         <Link to="/" className="brand-minimal">
-          <strong>Travel</strong>&nbsp;Tails
+          <strong>Alisha</strong>gram
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>

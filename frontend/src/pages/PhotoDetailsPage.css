@@ -17,7 +17,7 @@
   color: var(--bg);
   border: none;
   padding: 12px 24px;
-  border-radius: 50px;
+  border-radius: 0;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -38,12 +38,13 @@
 }
 
 .title-giant-text {
-  font-size: 12vw;
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 0.8;
-  color: var(--text);
-  text-transform: capitalize;
+  font-family: 'Anton', sans-serif;
+  font-size: 14vw;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  color: var(--accent);
+  text-transform: uppercase;
 }
 
 .details-main-grid {
@@ -57,9 +58,9 @@
 }
 
 .details-image-container {
-  border-radius: 40px;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4);
 }
 
 .details-image-container img {
@@ -91,7 +92,7 @@
 .details-author-badge img {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--surface);
 }
 

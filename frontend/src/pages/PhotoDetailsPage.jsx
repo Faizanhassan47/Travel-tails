@@ -41,7 +41,7 @@ const PhotoDetailsPage = () => {
       <div className="bg-blob blob-red"></div>
       <div className="bg-blob blob-blue"></div>
       <Helmet>
-        <title>{photo.title} - TravelTales</title>
+        <title>{photo.title} - Alishagram</title>
       </Helmet>
 
       <button onClick={() => navigate(-1)} className="minimal-back-btn">

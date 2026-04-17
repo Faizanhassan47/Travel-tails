@@ -7,6 +7,7 @@ import MapView from '../components/MapView';
 import api from '../services/api';
 import './HomePage.css';
 import ParallaxText from '../components/ParallaxText';
+import Marquee from '../components/Marquee';
 
 const HomePage = () => {
   const [photos, setPhotos] = useState([]);
@@ -55,11 +56,27 @@ const HomePage = () => {
   return (
     <div className="kreativ-home">
       <section className="kreativ-hero">
+        <div className="hero-visual-bg">
+          <img src="/src/assets/alishagram_hero_bg.png" alt="Hero Background" className="hero-img-bg" />
+          <div className="hero-vignette"></div>
+          <div className="hero-grid-overlay"></div>
+        </div>
+        
+        <Marquee text="1996 ALISHAGRAM " speed={30} />
+        <div className="marquee-reverse-wrapper">
+          <Marquee text=" ARCHIVE / VOL 01 / " speed={45} />
+        </div>
+
         <div className="hero-text-container">
+          <div className="hero-meta-top animate-fade-in">
+            <span>FILE: AL_ARCHIVE_01</span>
+            <span>LOC: EARTH / 2026</span>
+          </div>
+          
           <ParallaxText>
             <h1 className="kreativ-title animate-reveal">
-              Visual Story / <br/>
-              Human Journey
+              STYLE FILES / <br/>
+              ALISHAGRAM
             </h1>
           </ParallaxText>
           
@@ -87,13 +104,23 @@ const HomePage = () => {
         </div>
 
         {loading ? (
-          <div className="minimal-loader">Loading Tales...</div>
+          <div className="editorial-masonry-grid">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="editorial-masonry-grid_column">
+                <div className="brutalist-skeleton"></div>
+              </div>
+            ))}
+          </div>
         ) : viewMode === 'gallery' ? (
-          <div className="minimal-grid">
+          <Masonry
+            breakpointCols={{ default: 3, 1200: 2, 768: 1 }}
+            className="editorial-masonry-grid"
+            columnClassName="editorial-masonry-grid_column"
+          >
             {photos.map(photo => (
               <PhotoCard key={photo._id} photo={photo} />
             ))}
-          </div>
+          </Masonry>
         ) : (
           <div className="map-minimal-container">
             <MapView photos={photos} />

@@ -631,6 +631,170 @@
 }
 
 /* ════════════════════════════════════════
+   JOURNAL SECTION (EDITORIAL)
+   ════════════════════════════════════════ */
+.hp-journal {
+  background: #080A0F;
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hp-journal::before {
+  content: 'JOURNAL';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Anton', sans-serif;
+  font-size: 30vw;
+  color: rgba(255,255,255,0.02);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hp-journal-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.hp-journal-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 80px;
+}
+
+.hp-journal-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hp-journal-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.9;
+  margin-bottom: 32px;
+  color: #fff;
+}
+
+.hp-journal-title span {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+}
+
+.hp-journal-desc {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.hp-journal-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.hp-author-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80');
+  background-size: cover;
+  border: 2px solid var(--border);
+}
+
+.hp-journal-author strong {
+  display: block;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.hp-journal-author span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.hp-journal-btn {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 16px 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.hp-journal-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.hp-journal-visual {
+  position: relative;
+}
+
+.hp-journal-img-wrap {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: var(--shadow-lg);
+}
+
+.hp-journal-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hp-img-caption {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  padding: 4px 10px;
+  backdrop-filter: blur(4px);
+}
+
+.hp-journal-deco-box {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border);
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .hp-journal-content { grid-template-columns: 1fr; gap: 60px; }
+  .hp-journal-visual { order: -1; max-width: 600px; margin: 0 auto; }
+}
+
+/* ════════════════════════════════════════
    GALLERY
    ════════════════════════════════════════ */
 .hp-toggle-wrap {
@@ -789,6 +953,52 @@
   backdrop-filter: blur(8px);
 }
 .hp-cta-out:hover { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+/* ════════════════════════════════════════
+   MARQUEE TICKER
+   ════════════════════════════════════════ */
+.hp-ticker-band {
+  background: var(--accent);
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.hp-ticker-track {
+  display: flex;
+  animation: scrollTicker 30s linear infinite;
+  /* Will-change for smoother animation */
+  will-change: transform;
+}
+
+.hp-ticker-group {
+  display: flex;
+  align-items: center;
+}
+
+.hp-ticker-item {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.8rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 30px;
+}
+
+.hp-ticker-dot {
+  color: #080A0F;
+  font-size: 1.2rem;
+  padding: 0 10px;
+}
+
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Assuming content is duplicated enough to seamlessly loop at 50% */
+}
 
 /* ════════════════════════════════════════
    RESPONSIVE

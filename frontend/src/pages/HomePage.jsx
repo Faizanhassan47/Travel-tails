@@ -405,6 +405,56 @@ const HomePage = () => {
       </motion.section>
 
       {/* ══════════════════════════════════════
+          THE JOURNAL (EDITORIAL SECTION)
+          ══════════════════════════════════════ */}
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={revealVariants}
+        className="hp-journal"
+      >
+        <div className="hp-journal-container">
+          <div className="hp-journal-content">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="hp-journal-text"
+            >
+              <p className="hp-journal-eyebrow">Edition No. 04 — May 2024</p>
+              <h2 className="hp-journal-title">The Silence of <br /><span>THE DOLOMITES</span></h2>
+              <p className="hp-journal-desc">
+                "There is a specific kind of silence that only exists at 3,000 meters. 
+                It's not the absence of sound, but the presence of something ancient."
+              </p>
+              <div className="hp-journal-author">
+                <div className="hp-author-img" />
+                <div>
+                  <strong>Marco Vellini</strong>
+                  <span>Executive Member since 2024</span>
+                </div>
+              </div>
+              <MagneticButton className="hp-journal-btn">Read the Full Story</MagneticButton>
+            </motion.div>
+            
+            <div className="hp-journal-visual">
+              <motion.div 
+                initial={{ scale: 1.1, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1.5 }}
+                className="hp-journal-img-wrap"
+              >
+                <img src={MOSAIC_IMGS[0]} alt="Dolomites" />
+                <div className="hp-img-caption">Shot on Leica M11 · 35mm f/1.4</div>
+              </motion.div>
+              <div className="hp-journal-deco-box" />
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* ══════════════════════════════════════
           GALLERY
           ══════════════════════════════════════ */}
       <motion.section 
@@ -476,6 +526,26 @@ const HomePage = () => {
           </div>
         )}
       </motion.section>
+
+      {/* ══════════════════════════════════════
+          MARQUEE TICKER
+          ══════════════════════════════════════ */}
+      <div className="hp-ticker-band">
+        <div className="hp-ticker-track">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="hp-ticker-group">
+              <span className="hp-ticker-item">128 COUNTRIES</span>
+              <span className="hp-ticker-dot">✦</span>
+              <span className="hp-ticker-item">4,200+ STORIES</span>
+              <span className="hp-ticker-dot">✦</span>
+              <span className="hp-ticker-item">EXECUTIVE EDITION 2024</span>
+              <span className="hp-ticker-dot">✦</span>
+              <span className="hp-ticker-item">WORLDWIDE EXHIBITION</span>
+              <span className="hp-ticker-dot">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════
           CTA

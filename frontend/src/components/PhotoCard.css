@@ -1,3 +1,6 @@
+/* ════════════════════════════════════════
+   PHOTO CARD — Executive Edition
+   ════════════════════════════════════════ */
 .pcard {
   margin-bottom: 32px;
   cursor: pointer;
@@ -5,14 +8,18 @@
   overflow: hidden;
   background: var(--surface);
   border: 1px solid rgba(255,255,255,0.04);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s,
+              border-color 0.45s;
   outline: none;
+  position: relative;
 }
 
 .pcard:hover,
 .pcard:focus-visible {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+  transform: translateY(-8px) scale(1.012);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(192,112,80,0.15);
+  border-color: rgba(192,112,80,0.2);
 }
 
 .pcard:focus-visible {
@@ -20,7 +27,25 @@
   outline-offset: 2px;
 }
 
-/* Image wrapper */
+/* Scan line effect on hover */
+.pcard::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, rgba(192,112,80,0.04) 50%, transparent);
+  z-index: 5;
+  pointer-events: none;
+  transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pcard:hover::before {
+  top: 100%;
+}
+
+/* ── Image Wrapper ── */
 .pcard-img-wrap {
   position: relative;
   overflow: hidden;
@@ -31,23 +56,23 @@
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.25,1,0.5,1);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .pcard:hover .pcard-img {
-  transform: scale(1.05);
+  transform: scale(1.07);
 }
 
-/* Overlay */
+/* ── Overlay ── */
 .pcard-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.15) 0%,
-    transparent 35%,
-    transparent 55%,
-    rgba(0,0,0,0.6) 100%
+    rgba(0,0,0,0.2) 0%,
+    transparent 30%,
+    transparent 50%,
+    rgba(0,0,0,0.7) 100%
   );
   opacity: 0;
   transition: opacity 0.35s;
@@ -61,36 +86,57 @@
   opacity: 1;
 }
 
+/* Location badge — slides down from top */
 .pcard-overlay-top {
   display: flex;
   justify-content: flex-start;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+              opacity 0.4s ease 0.05s;
+}
+
+.pcard:hover .pcard-overlay-top {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .pcard-location-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
   color: #fff;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 4px 10px;
-  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 2px;
 }
 
+/* Like button — slides up from bottom */
 .pcard-overlay-bottom {
   display: flex;
   justify-content: flex-end;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
+              opacity 0.4s ease 0.08s;
+}
+
+.pcard:hover .pcard-overlay-bottom {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .pcard-like-btn {
-  width: 36px;
-  height: 36px;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(8px);
+  width: 38px;
+  height: 38px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 50%;
   color: #fff;
@@ -98,17 +144,39 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.25s, transform 0.25s, border-color 0.25s;
 }
 
 .pcard-like-btn:hover {
-  background: rgba(192,80,80,0.7);
-  transform: scale(1.15);
+  background: rgba(192,80,80,0.75);
+  border-color: rgba(255,100,100,0.3);
+  transform: scale(1.18);
 }
 
-/* Info */
+/* ── Info ── */
 .pcard-info {
-  padding: 14px 16px 16px;
+  padding: 14px 16px 18px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.pcard:hover .pcard-info {
+  background: rgba(192,112,80,0.04);
+}
+
+/* Accent underline on hover */
+.pcard-info::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 16px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pcard:hover .pcard-info::before {
+  width: calc(100% - 32px);
 }
 
 .pcard-title {
@@ -116,16 +184,21 @@
   font-size: 1.2rem;
   font-weight: 400;
   color: var(--text);
-  margin: 0 0 2px;
+  margin: 0 0 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+
+.pcard:hover .pcard-title {
+  color: #fff;
 }
 
 .pcard-author {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
   margin: 0;
   font-weight: 800;

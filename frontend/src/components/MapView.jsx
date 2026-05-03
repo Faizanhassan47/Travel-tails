@@ -49,6 +49,8 @@ const GeocodedMarker = ({ photo }) => {
 };
 
 const MapView = ({ photos }) => {
+  const photoList = Array.isArray(photos) ? photos : [];
+
   return (
     <div style={{ height: '600px', width: '100%', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border)' }}>
       <MapContainer center={[20, 0]} zoom={2} style={{ height: '100%', width: '100%', backgroundColor: '#1e293b' }}>
@@ -56,7 +58,7 @@ const MapView = ({ photos }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
-        {photos.map(photo => (
+        {photoList.map(photo => (
           <GeocodedMarker key={photo._id} photo={photo} />
         ))}
       </MapContainer>

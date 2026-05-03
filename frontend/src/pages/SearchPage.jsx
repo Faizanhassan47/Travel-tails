@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PhotoCard from '../components/PhotoCard';
-import api from '../services/api';
+import api, { toArrayPayload } from '../services/api';
 import './SearchPage.css';
 
 const SearchPage = () => {
@@ -19,8 +19,8 @@ const SearchPage = () => {
     setLoading(true);
     setSearched(true);
     try {
-      const { data } = await api.get(`/photos/search?q=${query}`);
-      setResults(data);
+      const { data } = await api.get(`/photos/search?q=${encodeURIComponent(query)}`);
+      setResults(toArrayPayload(data));
     } catch (error) {
       console.error('Search failed', error);
       setResults([]);

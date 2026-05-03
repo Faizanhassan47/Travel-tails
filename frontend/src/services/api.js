@@ -6,6 +6,18 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+export const toArrayPayload = (payload, keys = ['data', 'photos', 'results', 'items']) => {
+  if (Array.isArray(payload)) return payload;
+
+  for (const key of keys) {
+    if (Array.isArray(payload?.[key])) {
+      return payload[key];
+    }
+  }
+
+  return [];
+};
+
 // Interceptor to add auth token
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');

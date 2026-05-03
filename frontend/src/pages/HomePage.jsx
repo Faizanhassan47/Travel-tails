@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import Masonry from 'react-masonry-css';
 import PhotoCard from '../components/PhotoCard';
-import api from '../services/api';
+import api, { toArrayPayload } from '../services/api';
 import './HomePage.css';
 
 const MapView = lazy(() => import('../components/MapView'));
@@ -113,7 +113,7 @@ const HomePage = () => {
 
   useEffect(() => {
     api.get('/photos')
-      .then(({ data }) => setPhotos(data))
+      .then(({ data }) => setPhotos(toArrayPayload(data)))
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
@@ -123,12 +123,13 @@ const HomePage = () => {
     if (searchQuery.trim()) navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
   };
 
+  const photoList = Array.isArray(photos) ? photos : [];
   const filteredPhotos = activeCategory
-    ? photos.filter(p =>
+    ? photoList.filter(p =>
         p.tags?.some(t => t.toLowerCase().includes(activeCategory.toLowerCase())) ||
         p.title?.toLowerCase().includes(activeCategory.toLowerCase()) ||
         p.country?.toLowerCase().includes(activeCategory.toLowerCase()))
-    : photos;
+    : photoList;
 
   return (
     <div className="hp-root">

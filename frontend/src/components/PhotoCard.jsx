@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Heart } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './PhotoCard.css';
 
 const optimizeCloudinaryUrl = (url) => {
@@ -23,7 +24,8 @@ const PhotoCard = ({ photo }) => {
       aria-label={`View photo: ${photo.title}`}
     >
       <div className="pcard-img-wrap">
-        <img
+        <motion.img
+          layoutId={`photo-image-${photo._id}`}
           src={optimizeCloudinaryUrl(photo.imageUrl)}
           alt={photo.title}
           className="pcard-img"

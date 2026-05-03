@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import api from '../services/api';
 import CommentSection from '../components/CommentSection';
 import RatingStars from '../components/RatingStars';
@@ -58,7 +59,11 @@ const PhotoDetailsPage = () => {
         {/* Visual Column */}
         <div className="details-visual-col">
           <div className="details-image-container">
-            <img src={photo.imageUrl} alt={photo.title} />
+            <motion.img 
+              layoutId={`photo-image-${photo._id}`}
+              src={photo.imageUrl} 
+              alt={photo.title} 
+            />
           </div>
         </div>
 

@@ -148,6 +148,24 @@
   margin-left: 5px;
 }
 
+.auth-toast-popup {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: #E85D5D;
+  color: #0A0C14;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(232, 93, 93, 0.2);
+}
+
 /* Mobile */
 @media (max-width: 1200px) {
   .auth-title-large { font-size: 6rem; }

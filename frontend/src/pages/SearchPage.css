@@ -9,11 +9,18 @@
 
 .explore-header-minimal {
   position: absolute;
-  top: -80px;
-  left: -20px;
-  z-index: 0;
+  top: 40px;
+  right: 60px;
+  opacity: 0.1;
   pointer-events: none;
-  opacity: 0.04;
+}
+
+.title-giant {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(4rem, 15vw, 20vw);
+  line-height: 0.8;
+  color: var(--text);
+  text-transform: uppercase;
 }
 
 .explore-content {
@@ -24,11 +31,13 @@
 }
 
 .explore-title-main {
-  font-size: 5rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   margin-bottom: 60px;
-  color: var(--text);
+  line-height: 1;
 }
 
 .search-field-minimal {
@@ -38,19 +47,21 @@
 
 .minimal-search-input {
   width: 100%;
-  border: none;
-  border-bottom: 4px solid var(--text);
-  padding: 20px 0;
-  font-size: 3rem;
-  font-weight: 500;
-  outline: none;
   background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--border);
+  padding: 20px 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 500;
   color: var(--text);
-  transition: border-color 0.3s;
+  outline: none;
+  transition: border-color 0.4s;
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
 }
 
 .minimal-search-input::placeholder {
-  color: var(--border);
+  color: rgba(255,255,255,0.05);
 }
 
 .minimal-search-input:focus {

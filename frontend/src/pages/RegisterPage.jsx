@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import authBg from '../assets/alishagram_auth_bg.png';
 import { UserPlus, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/useAuth';
 import './AuthPages.css';
@@ -25,22 +26,18 @@ const RegisterPage = () => {
   return (
     <div className="kreativ-auth">
       <div className="auth-visual-side">
-        <img src="/src/assets/alishagram_auth_bg.png" alt="Auth Background" />
+        <img src={authBg} alt="Auth Background" />
         <div className="auth-vignette"></div>
       </div>
 
       <div className="auth-form-side">
-        <div className="auth-header-minimal">
-          <h1 className="title-giant">Create</h1>
-        </div>
-
         <div className="auth-card-minimal">
-          <button onClick={() => navigate(-1)} className="minimal-back-btn" style={{ marginBottom: '40px' }}>
-            <ArrowLeft size={24} />
+          <button onClick={() => navigate(-1)} className="minimal-back-btn">
+            <ArrowLeft size={18} strokeWidth={3} />
             <span>Back</span>
           </button>
 
-        <h2 className="auth-title-large">Join /<br/>Community</h2>
+        <h2 className="auth-title-large">JOIN /<br/>COMMUNITY</h2>
 
         {error && <div className="minimal-error" style={{ marginBottom: '32px' }}>{error}</div>}
 
@@ -62,7 +59,7 @@ const RegisterPage = () => {
 
           <div className="auth-input-group">
              <label>Account Type</label>
-             <select name="role" value={formData.role} onChange={handleChange} className="minimal-select" style={{ background: 'transparent', border: 'none', borderBottom: '2px solid #eee', padding: '16px 0', fontSize: '1.1rem', outline: 'none' }}>
+             <select name="role" value={formData.role} onChange={handleChange} className="minimal-select">
                 <option value="consumer">Consumer (Browse & Rate)</option>
                 <option value="creator">Creator (Upload Photos)</option>
              </select>
@@ -83,4 +80,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-

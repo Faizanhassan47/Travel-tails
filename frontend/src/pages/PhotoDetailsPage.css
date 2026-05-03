@@ -13,23 +13,25 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--text);
-  color: var(--bg);
+  background: #fff;
+  color: #000;
   border: none;
-  padding: 12px 24px;
-  border-radius: 0;
-  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  margin: 0 60px 60px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0 60px 40px;
 }
-
 .minimal-back-btn:hover {
   transform: translateX(-5px);
+  background: var(--accent);
+  color: #fff;
 }
 
 .title-giant-header {
@@ -39,12 +41,13 @@
 
 .title-giant-text {
   font-family: 'Anton', sans-serif;
-  font-size: 14vw;
+  font-size: clamp(4rem, 10vw, 12vw);
   font-weight: 400;
   letter-spacing: 0.02em;
-  line-height: 0.9;
-  color: var(--accent);
+  line-height: 0.85;
+  color: var(--text);
   text-transform: uppercase;
+  margin: 0;
 }
 
 .details-main-grid {
@@ -106,9 +109,12 @@
 }
 
 .details-author-info .name {
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 400;
   color: var(--text);
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 .details-location-tag {
@@ -120,11 +126,12 @@
 }
 
 .details-caption {
-  font-size: 1.8rem;
-  line-height: 1.4;
-  color: var(--text);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  line-height: 1.5;
+  color: var(--text-muted);
   margin-bottom: 60px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  max-width: 600px;
 }
 
 .details-journal-section {

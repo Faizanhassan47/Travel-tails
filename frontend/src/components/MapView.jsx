@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useNavigate } from 'react-router-dom';
+import './MapView.css';
 
 // Fix for default marker icons in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -17,7 +18,6 @@ const GeocodedMarker = ({ photo }) => {
   const [position, setPosition] = useState(null);
 
   useEffect(() => {
-    // Simple geocoding using OSM Nominatim
     const geocode = async () => {
       try {
         const query = encodeURIComponent(`${photo.city}, ${photo.country}`);
@@ -38,10 +38,10 @@ const GeocodedMarker = ({ photo }) => {
   return (
     <Marker position={position}>
       <Popup>
-        <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => navigate(`/photo/${photo._id}`)}>
-          <img src={photo.imageUrl} alt={photo.title} style={{ width: '150px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
-          <h4 style={{ margin: '8px 0 4px', fontSize: '1rem' }}>{photo.title}</h4>
-          <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>{photo.city}</p>
+        <div className="map-popup-content" onClick={() => navigate(`/photo/${photo._id}`)}>
+          <img src={photo.imageUrl} alt={photo.title} className="map-popup-img" />
+          <h4 className="map-popup-title">{photo.title}</h4>
+          <p className="map-popup-meta">{photo.city}, {photo.country}</p>
         </div>
       </Popup>
     </Marker>
@@ -52,8 +52,13 @@ const MapView = ({ photos }) => {
   const photoList = Array.isArray(photos) ? photos : [];
 
   return (
-    <div style={{ height: '600px', width: '100%', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-      <MapContainer center={[20, 0]} zoom={2} style={{ height: '100%', width: '100%', backgroundColor: '#1e293b' }}>
+    <div className="map-wrapper">
+      <MapContainer 
+        center={[20, 0]} 
+        zoom={2} 
+        style={{ height: '100%', width: '100%', backgroundColor: '#0A0C14' }}
+        zoomControl={false}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

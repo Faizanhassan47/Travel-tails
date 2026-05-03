@@ -1,8 +1,8 @@
 .kreativ-auth {
   display: flex;
   min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
+  background: #0A0C14;
+  color: #F2EFE8;
   overflow: hidden;
 }
 
@@ -10,19 +10,19 @@
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: var(--surface);
+  background: #0A0C14;
 }
 
 .auth-visual-side img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.1);
+  filter: grayscale(100%) contrast(1.1) brightness(0.7);
 }
 
 .auth-form-side {
   flex: 1;
-  padding: 100px 80px;
+  padding: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,35 +32,48 @@
 .auth-vignette {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, transparent, var(--bg));
-}
-
-
-.auth-header-minimal {
-  position: absolute;
-  top: -80px;
-  left: -20px;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.05;
+  background: linear-gradient(to right, transparent, #0A0C14);
 }
 
 .auth-card-minimal {
   width: 100%;
-  max-width: 600px;
+  max-width: 550px;
   position: relative;
   z-index: 10;
 }
 
+.minimal-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F2EFE8;
+  color: #0A0C14;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 2px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-bottom: 60px;
+  width: fit-content;
+  transition: transform 0.2s;
+}
+
+.minimal-back-btn:hover {
+  transform: translateX(-4px);
+}
+
 .auth-title-large {
   font-family: 'Anton', sans-serif;
-  font-size: 5rem;
+  font-size: 8.5rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
-  line-height: 0.9;
-  margin-bottom: 40px;
-  color: var(--text);
+  line-height: 0.85;
+  margin-bottom: 60px;
+  color: #F2EFE8;
 }
 
 .auth-form-minimal {
@@ -72,76 +85,81 @@
 .auth-input-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .auth-input-group label {
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-size: 0.65rem;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  color: #8A96A8;
 }
 
 .auth-input-group input,
 .auth-input-group select {
   background: transparent;
   border: none;
-  border-bottom: 2px solid var(--border);
-  padding: 16px 0;
-  font-size: 1.2rem;
+  border-bottom: 2px solid #2E3547;
+  padding: 12px 0;
+  font-size: 1.4rem;
   outline: none;
-  color: var(--text);
+  color: #F2EFE8;
   transition: border-color 0.3s;
 }
 
 .auth-input-group input:focus,
 .auth-input-group select:focus {
-  border-color: var(--text);
+  border-color: #F2EFE8;
 }
 
 .auth-submit-btn {
-  background: var(--text);
-  color: var(--bg);
+  background: #F2EFE8;
+  color: #0A0C14;
   border: none;
-  padding: 24px;
+  padding: 22px;
   border-radius: 0;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-weight: 900;
+  letter-spacing: 0.2em;
   cursor: pointer;
   transition: transform 0.2s, opacity 0.2s;
   margin-top: 20px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
 }
 
 .auth-submit-btn:hover {
-  opacity: 0.85;
+  opacity: 0.9;
   transform: translateY(-2px);
 }
 
 .auth-footer-minimal {
   margin-top: 40px;
   text-align: left;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: #8A96A8;
 }
 
 .auth-footer-minimal a {
-  color: var(--text);
-  font-weight: 700;
+  color: #F2EFE8;
+  font-weight: 800;
   text-decoration: none;
-  border-bottom: 2px solid var(--text);
+  border-bottom: 1px solid #F2EFE8;
+  margin-left: 5px;
 }
 
 /* Mobile */
+@media (max-width: 1200px) {
+  .auth-title-large { font-size: 6rem; }
+}
+
 @media (max-width: 1000px) {
   .auth-visual-side { display: none; }
-  .auth-form-side { padding: 120px 40px 60px; }
+  .auth-form-side { padding: 80px 40px; }
 }
 
 @media (max-width: 480px) {
-  .auth-form-side { padding: 120px 20px 40px; }
-  .auth-title-large { font-size: 3rem; }
-  .auth-submit-btn { padding: 18px; font-size: 0.8rem; }
+  .auth-form-side { padding: 60px 24px; }
+  .auth-title-large { font-size: 4rem; }
+  .auth-submit-btn { padding: 18px; font-size: 0.75rem; }
 }

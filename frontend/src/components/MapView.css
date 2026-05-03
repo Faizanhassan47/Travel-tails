@@ -1,0 +1,54 @@
+.map-wrapper {
+  height: 600px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.map-popup-content {
+  text-align: center;
+  cursor: pointer;
+  padding: 4px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.map-popup-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+.map-popup-title {
+  font-family: 'Anton', sans-serif;
+  margin: 12px 0 4px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1;
+}
+
+.map-popup-meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Override Leaflet defaults */
+.leaflet-popup-content-wrapper {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--border) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--surface) !important;
+}

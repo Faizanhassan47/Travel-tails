@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Search, ArrowRight, TrendingUp, Globe, Camera, Compass,
   Mountain, Waves, Building2, Trees, Sunset, Star,
@@ -7,6 +8,9 @@ import {
 } from 'lucide-react';
 import Masonry from 'react-masonry-css';
 import PhotoCard from '../components/PhotoCard';
+import Marquee from '../components/Marquee';
+import ParallaxText from '../components/ParallaxText';
+import MagneticButton from '../components/MagneticButton';
 import api, { toArrayPayload } from '../services/api';
 import './HomePage.css';
 
@@ -131,6 +135,11 @@ const HomePage = () => {
         p.country?.toLowerCase().includes(activeCategory.toLowerCase()))
     : photoList;
 
+  const revealVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   return (
     <div className="hp-root">
 
@@ -153,27 +162,38 @@ const HomePage = () => {
         <div className="hp-hero-left">
 
           {/* Pill badge */}
-          <div className="hp-hero-badge">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="hp-hero-badge"
+          >
             <span className="hp-badge-dot" />
             <Star size={11} />
-            <span>Community Travel Journal · Est. 2024</span>
-          </div>
+            <span>Executive Community Journal · Est. 2024</span>
+          </motion.div>
 
           {/* Big headline */}
           <h1 className="hp-hero-h1">
-            <span className="hp-line hp-line-1">Where Every</span>
-            <span className="hp-line hp-line-accent">Journey</span>
-            <span className="hp-line hp-line-3">Becomes a</span>
-            <span className="hp-line hp-line-4">Story.</span>
+            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 0.9, y: 0 }} transition={{ delay: 0.3 }} className="hp-line hp-line-1">Where Every</motion.span>
+            <motion.span initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 1 }} className="hp-line hp-line-accent">JOURNEY</motion.span>
+            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 0.9, y: 0 }} transition={{ delay: 0.7 }} className="hp-line hp-line-3">Becomes a</motion.span>
+            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="hp-line hp-line-4">STORY.</motion.span>
           </h1>
 
-          <p className="hp-hero-desc">
-            Alishagram is a living journal of human connection — 
-            a community of explorers capturing the world one frame at a time.
-          </p>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="hp-hero-desc">
+            Alishagram is a curated journal of human connection — 
+            an elite community of explorers capturing the world's most breathtaking frames.
+          </motion.p>
 
           {/* Search */}
-          <form className="hp-hero-search" onSubmit={handleSearch}>
+          <motion.form 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3 }}
+            className="hp-hero-search" 
+            onSubmit={handleSearch}
+          >
             <Search size={18} className="hp-si" />
             <input
               id="homepage-search"
@@ -184,14 +204,14 @@ const HomePage = () => {
               onChange={e => setSearchQuery(e.target.value)}
               autoComplete="off"
             />
-            <button type="submit" id="homepage-search-submit" className="hp-hero-btn">
+            <MagneticButton type="submit" id="homepage-search-submit" className="hp-hero-btn">
               <span>Search</span>
               <ArrowRight size={15} />
-            </button>
-          </form>
+            </MagneticButton>
+          </motion.form>
 
           {/* Trending chips */}
-          <div className="hp-trending">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="hp-trending">
             <span className="hp-trend-label">
               <TrendingUp size={13} /> Trending
             </span>
@@ -200,10 +220,10 @@ const HomePage = () => {
                 {t}
               </button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Hero inline stats */}
-          <div className="hp-hero-stats">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.7 }} className="hp-hero-stats">
             {STATS.map(({ value, label, StatIcon: icon }) => (
               <div key={label} className="hp-hstat">
                 {React.createElement(icon, { size: 16, className: 'hp-hstat-icon' })}
@@ -211,7 +231,7 @@ const HomePage = () => {
                 <span>{label}</span>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* ── RIGHT COLUMN — photo mosaic ── */}
@@ -219,62 +239,62 @@ const HomePage = () => {
           <div className="hp-mosaic">
             {/* top row: 1 tall + 1 short */}
             <div className="hp-mosaic-col hp-mosaic-col-a">
-              <div className="hp-mosaic-item hp-mi-tall">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="hp-mosaic-item hp-mi-tall">
                 <img src={MOSAIC_IMGS[0]} alt="Mountain" loading="lazy"/>
                 <div className="hp-mi-overlay">
                   <MapPin size={12}/> Dolomites, Italy
                 </div>
-              </div>
-              <div className="hp-mosaic-item hp-mi-short">
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="hp-mosaic-item hp-mi-short">
                 <img src={MOSAIC_IMGS[1]} alt="Lake" loading="lazy"/>
                 <div className="hp-mi-overlay">
                   <MapPin size={12}/> Banff, Canada
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* middle col: short top + tall bottom */}
             <div className="hp-mosaic-col hp-mosaic-col-b">
-              <div className="hp-mosaic-item hp-mi-short">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="hp-mosaic-item hp-mi-short">
                 <img src={MOSAIC_IMGS[2]} alt="Beach" loading="lazy"/>
                 <div className="hp-mi-overlay">
                   <MapPin size={12}/> Maldives
                 </div>
-              </div>
-              <div className="hp-mosaic-item hp-mi-tall">
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }} className="hp-mosaic-item hp-mi-tall">
                 <img src={MOSAIC_IMGS[3]} alt="City" loading="lazy"/>
                 <div className="hp-mi-overlay">
                   <MapPin size={12}/> Tokyo, Japan
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* right col: full-height single */}
             <div className="hp-mosaic-col hp-mosaic-col-c">
-              <div className="hp-mosaic-item hp-mi-full">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4 }} className="hp-mosaic-item hp-mi-full">
                 <img src={MOSAIC_IMGS[4]} alt="Peak" loading="lazy"/>
                 <div className="hp-mi-overlay">
                   <MapPin size={12}/> Everest Base, Nepal
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Floating decorative cards */}
-            <div className="hp-float-card hp-fc-1">
+            <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }} className="hp-float-card hp-fc-1">
               <Camera size={14} />
               <div>
                 <strong>12 new stories</strong>
                 <span>just uploaded</span>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="hp-float-card hp-fc-2">
+            <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 6, delay: 3, ease: "easeInOut" }} className="hp-float-card hp-fc-2">
               <Upload size={14} />
               <div>
                 <strong>Share yours</strong>
                 <span>Join 50K+ explorers</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
@@ -291,9 +311,22 @@ const HomePage = () => {
       </section>
 
       {/* ══════════════════════════════════════
+          MARQUEE DIVIDER
+          ══════════════════════════════════════ */}
+      <div style={{ position: 'relative', height: '15vw', overflow: 'hidden', background: '#0A0C14', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+        <Marquee text="THE JOURNEY IS THE DESTINATION · EXPLORE THE UNKNOWN · CAPTURE THE MOMENT · " speed={30} />
+      </div>
+
+      {/* ══════════════════════════════════════
           CATEGORY CARDS
           ══════════════════════════════════════ */}
-      <section className="hp-categories">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={revealVariants}
+        className="hp-categories"
+      >
         <div className="hp-section-header">
           <div>
             <p className="hp-eyebrow">Browse by Theme</p>
@@ -317,12 +350,18 @@ const HomePage = () => {
             </button>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* ══════════════════════════════════════
           RECOMMENDATIONS
           ══════════════════════════════════════ */}
-      <section className="hp-reco">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={revealVariants}
+        className="hp-reco"
+      >
         <div className="hp-section-header">
           <div>
             <p className="hp-eyebrow">Curated for You</p>
@@ -363,12 +402,21 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* ══════════════════════════════════════
           GALLERY
           ══════════════════════════════════════ */}
-      <section className="hp-gallery">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={revealVariants}
+        className="hp-gallery"
+      >
+        <div style={{ height: '30vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+           <ParallaxText className="parallax-giant-text">ALISHAGRAM EXHIBITION</ParallaxText>
+        </div>
         <div className="hp-section-header">
           <div>
             <p className="hp-eyebrow">Community Picks</p>
@@ -393,7 +441,17 @@ const HomePage = () => {
         ) : viewMode === 'gallery' ? (
           filteredPhotos.length > 0 ? (
             <Masonry breakpointCols={{default:3,1200:2,700:1}} className="hp-masonry" columnClassName="hp-masonry-col">
-              {filteredPhotos.map(p => <PhotoCard key={p._id} photo={p} />)}
+              {filteredPhotos.map((p, idx) => (
+                <motion.div
+                  key={p._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                >
+                  <PhotoCard photo={p} />
+                </motion.div>
+              ))}
             </Masonry>
           ) : (
             <div className="hp-empty">
@@ -417,12 +475,18 @@ const HomePage = () => {
             </button>
           </div>
         )}
-      </section>
+      </motion.section>
 
       {/* ══════════════════════════════════════
           CTA
           ══════════════════════════════════════ */}
-      <section className="hp-cta">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={revealVariants}
+        className="hp-cta"
+      >
         <div className="hp-cta-glow" />
         <div className="hp-cta-inner">
           <TrendingUp size={30} className="hp-cta-icon" />
@@ -432,11 +496,11 @@ const HomePage = () => {
             Upload your travel moments and inspire the world.
           </p>
           <div className="hp-cta-btns">
-            <button className="hp-cta-prim" onClick={() => navigate('/upload')} id="cta-upload-btn">Start Sharing</button>
-            <button className="hp-cta-out"  onClick={() => navigate('/register')} id="cta-join-btn">Join the Community</button>
+            <MagneticButton className="hp-cta-prim" onClick={() => navigate('/upload')} id="cta-upload-btn">Start Sharing</MagneticButton>
+            <MagneticButton className="hp-cta-out"  onClick={() => navigate('/register')} id="cta-join-btn">Join the Community</MagneticButton>
           </div>
         </div>
-      </section>
+      </motion.section>
 
     </div>
   );

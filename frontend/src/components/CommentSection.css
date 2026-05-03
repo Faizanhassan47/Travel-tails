@@ -29,22 +29,23 @@
 }
 
 .comment-submit {
-  background: var(--text);
-  color: var(--bg);
+  background: var(--accent);
+  color: #fff;
   border: none;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.3s;
   flex-shrink: 0;
 }
-
-.comment-submit:hover { opacity: 0.7; }
-.comment-submit:disabled { opacity: 0.3; cursor: not-allowed; }
+.comment-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(192,112,80,0.3);
+}
 
 .comment-login-prompt {
   padding: 16px 0;
@@ -72,8 +73,12 @@
 }
 
 .comment-author {
-  font-weight: 700;
-  color: var(--accent);
+  font-family: 'Anton', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .comment-date {

@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Storm&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Storm&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap');
 
 /* ── Design Tokens ── */
 :root {
-  --bg:          #1A1F2E;
+  --bg:          #0A0C14;
   --text:        #F2EFE8;
   --text-muted:  #8A96A8;
-  --surface:     #242938;
-  --border:      #2E3547;
+  --surface:     #121620;
+  --border:      #1E2330;
   --accent:      #C07050;
   --accent-2:    #4A9FC4;
-  --drawer-bg:   #111520;
-  --shadow-lg:   0 40px 100px rgba(0,0,0,0.5);
+  --drawer-bg:   #080A0F;
+  --shadow-lg:   0 40px 100px rgba(0,0,0,0.6);
 }
 
 /* ── Reset ── */
@@ -48,13 +48,22 @@ body {
 /* ── Film Grain ── */
 .film-grain {
   position: fixed;
-  inset: 0;
+  inset: -100%;
   z-index: 9991;
   pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
-  animation: grain 8s steps(10) infinite;
+  animation: grain 1.5s steps(6) infinite;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 9990;
 }
 
 @keyframes grain {

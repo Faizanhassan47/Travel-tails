@@ -1,12 +1,11 @@
-/* ─── Photo Card ─── */
 .pcard {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   cursor: pointer;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
   background: var(--surface);
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
   outline: none;
 }
 
@@ -113,19 +112,23 @@
 }
 
 .pcard-title {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
   color: var(--text);
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .pcard-author {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   margin: 0;
-  font-weight: 400;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }

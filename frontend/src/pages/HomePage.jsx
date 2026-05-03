@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Search, ArrowRight, TrendingUp, Globe, Camera, Compass,
@@ -7,9 +7,10 @@ import {
 } from 'lucide-react';
 import Masonry from 'react-masonry-css';
 import PhotoCard from '../components/PhotoCard';
-import MapView from '../components/MapView';
 import api from '../services/api';
 import './HomePage.css';
+
+const MapView = lazy(() => import('../components/MapView'));
 
 /* ── Data ─────────────────────────────── */
 const CATEGORIES = [
@@ -392,7 +393,11 @@ const HomePage = () => {
             </div>
           )
         ) : (
-          <div className="hp-map-wrap"><MapView photos={filteredPhotos} /></div>
+          <div className="hp-map-wrap">
+            <Suspense fallback={null}>
+              <MapView photos={filteredPhotos} />
+            </Suspense>
+          </div>
         )}
 
         {!loading && viewMode==='gallery' && filteredPhotos.length>0 && (

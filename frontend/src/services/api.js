@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL;
+let API_URL = import.meta.env.VITE_API_URL || 'https://alishagram-backend-production.up.railway.app/api/';
+
+// Auto-correct the URL if the user forgot to add /api/ in their Vercel Environment Variables
+if (API_URL && !API_URL.includes('/api')) {
+  API_URL = API_URL.replace(/\/$/, '') + '/api/';
+}
 
 const api = axios.create({
   baseURL: API_URL,

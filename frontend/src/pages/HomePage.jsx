@@ -33,7 +33,7 @@ const RECOMMENDED = [
     name: 'Cappadocia',
     tag: 'Adventure',
     location: 'Türkiye, Asia',
-    img: 'https://images.unsplash.com/photo-1530267781934-73a22b881994?w=600&q=80',
+    img: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=80',
   },
   {
     name: 'Kyoto',
@@ -343,7 +343,16 @@ const HomePage = () => {
               onKeyDown={e => e.key === 'Enter' && navigate(`/search?q=${encodeURIComponent(name)}`)}
               aria-label={`Explore ${name}`}
             >
-              <img src={img} alt={name} className="hp-reco-img" loading="lazy" />
+              <img
+                src={img}
+                alt={name}
+                className="hp-reco-img"
+                loading="lazy"
+                onError={e => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = MOSAIC_IMGS[0];
+                }}
+              />
               <div className="hp-reco-overlay">
                 <span className="hp-reco-tag">{tag}</span>
                 <div className="hp-reco-name">{name}</div>

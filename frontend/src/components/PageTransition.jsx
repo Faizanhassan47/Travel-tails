@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const MotionDiv = motion.div;
+
 const pageVariants = {
   initial: {
     opacity: 0,
@@ -29,14 +31,14 @@ const pageVariants = {
 
 const PageTransition = ({ children }) => {
   return (
-    <motion.div
+    <MotionDiv
       initial="initial"
       animate="enter"
       exit="exit"
       variants={pageVariants}
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 

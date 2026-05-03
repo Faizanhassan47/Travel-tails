@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Send } from 'lucide-react';
 import api from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 import './CommentSection.css';
 
 const CommentSection = ({ photoId }) => {
@@ -10,18 +10,20 @@ const CommentSection = ({ photoId }) => {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
       const { data } = await api.get(`/photos/${photoId}/comments`);
       setComments(data);
     } catch (error) {
       console.error('Fetch comments failed', error);
     }
-  };
+  }, [photoId]);
 
   useEffect(() => {
-    if (photoId) fetchComments();
-  }, [photoId]);
+    if (!photoId) return undefined;
+    const timer = setTimeout(fetchComments, 0);
+    return () => clearTimeout(timer);
+  }, [photoId, fetchComments]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const CommentSection = ({ photoId }) => {
     try {
       await api.post(`/photos/${photoId}/comments`, { text });
       setText('');
-      fetchComments();
+      await fetchComments();
     } catch (error) {
       console.error('Post comment failed', error);
     }

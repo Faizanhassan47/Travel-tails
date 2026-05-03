@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Search, ArrowRight, TrendingUp, Globe, Camera, Compass,
@@ -50,10 +50,10 @@ const RECOMMENDED = [
 ];
 
 const STATS = [
-  { value: '2M+',  label: 'Photos', icon: Image },
-  { value: '180+', label: 'Countries', icon: Globe },
-  { value: '50K+', label: 'Explorers', icon: Users },
-  { value: '99%',  label: 'Free',   icon: Star },
+  { value: '2M+',  label: 'Photos', StatIcon: Image },
+  { value: '180+', label: 'Countries', StatIcon: Globe },
+  { value: '50K+', label: 'Explorers', StatIcon: Users },
+  { value: '99%',  label: 'Free',   StatIcon: Star },
 ];
 
 const PHRASES = [
@@ -204,9 +204,9 @@ const HomePage = () => {
 
           {/* Hero inline stats */}
           <div className="hp-hero-stats">
-            {STATS.map(({ value, label, icon: Icon }) => (
+            {STATS.map(({ value, label, StatIcon: icon }) => (
               <div key={label} className="hp-hstat">
-                <Icon size={16} className="hp-hstat-icon" />
+                {React.createElement(icon, { size: 16, className: 'hp-hstat-icon' })}
                 <strong>{value}</strong>
                 <span>{label}</span>
               </div>
@@ -304,14 +304,14 @@ const HomePage = () => {
           </button>
         </div>
         <div className="hp-cat-grid">
-          {CATEGORIES.map(({ label, icon: Icon, color }) => (
+          {CATEGORIES.map(({ label, icon, color }) => (
             <button
               key={label}
               className={`hp-cat-card ${activeCategory === label ? 'cat-on' : ''}`}
               onClick={() => setActiveCategory(activeCategory === label ? null : label)}
               style={{ '--cc': color }}
             >
-              <div className="hp-cat-icon"><Icon size={22} /></div>
+              <div className="hp-cat-icon">{React.createElement(icon, { size: 22 })}</div>
               <span className="hp-cat-label">{label}</span>
               {activeCategory === label && <div className="hp-cat-pip" />}
             </button>

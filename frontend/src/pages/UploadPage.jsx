@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UploadCloud, Image as ImageIcon, X, MapPin, Globe, ArrowLeft } from 'lucide-react';
+import { UploadCloud, X, ArrowLeft } from 'lucide-react';
 import api from '../services/api';
 import './UploadPage.css';
 

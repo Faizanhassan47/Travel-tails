@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
@@ -14,7 +14,7 @@ const PhotoDetailsPage = () => {
   const [ratingObj, setRatingObj] = useState({ average: 0, count: 0 });
   const [loading, setLoading] = useState(true);
 
-  const fetchPhotoData = async () => {
+  const fetchPhotoData = useCallback(async () => {
     try {
       const [photoRes, ratingRes] = await Promise.all([
         api.get(`/photos/${id}`),
@@ -27,11 +27,12 @@ const PhotoDetailsPage = () => {
       console.error('Failed to load photo', error);
       setLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
-    fetchPhotoData();
-  }, [id]);
+    const timer = setTimeout(fetchPhotoData, 0);
+    return () => clearTimeout(timer);
+  }, [fetchPhotoData]);
 
   if (loading) return <div className="kreativ-details" style={{ textAlign: 'center' }}>Loading photo...</div>;
   if (!photo) return <div className="kreativ-details" style={{ textAlign: 'center' }}>Photo not found.</div>;

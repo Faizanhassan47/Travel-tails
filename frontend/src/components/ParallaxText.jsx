@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
+const MotionDiv = motion.div;
+
 const ParallaxText = ({ children, className }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -11,9 +13,9 @@ const ParallaxText = ({ children, className }) => {
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className}>
+    <MotionDiv ref={ref} style={{ y }} className={className}>
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 

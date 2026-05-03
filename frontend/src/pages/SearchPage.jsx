@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Search, ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PhotoCard from '../components/PhotoCard';
 import api, { toArrayPayload } from '../services/api';

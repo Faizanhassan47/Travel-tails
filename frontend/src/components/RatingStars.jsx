@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Star } from 'lucide-react';
 import api from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 
 const RatingStars = ({ photoId, currentRatingObj, onRatingChange }) => {
   const { user } = useAuth();
